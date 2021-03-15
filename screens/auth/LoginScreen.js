@@ -1,16 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StartScreen = ({ navigation }) => {
+import LoginModal from '../../components/auth/LoginModal';
+
+const LoginScreen = ({ navigation }) => {
   return (
     <Container>
-      <Text>This is the start screen</Text>
-      <Button title='Begin!' onPress={() => navigation.push('Form')} />
+      <LoginModal
+        login={() => navigation.push('Start')}
+        signup={() => navigation.push('Signup')}
+      />
     </Container>
   );
 };
 
-export default StartScreen;
+export default LoginScreen;
 
 const Container = styled.View`
   flex: 1;

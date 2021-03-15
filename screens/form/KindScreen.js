@@ -1,16 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StartScreen = ({ navigation }) => {
+const KindScreen = ({ navigation }) => {
   return (
     <Container>
-      <Text>This is the start screen</Text>
-      <Button title='Begin!' onPress={() => navigation.push('Form')} />
+      <Text>This is the Kind screen</Text>
+      <Button
+        onPress={() => navigation.push('Checklist')}
+        title='To Checklist'
+      />
     </Container>
   );
 };
 
-export default StartScreen;
+export default KindScreen;
 
 const Container = styled.View`
   flex: 1;

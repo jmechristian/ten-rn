@@ -1,16 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StartScreen = ({ navigation }) => {
+const FearfulScreen = ({ navigation }) => {
   return (
     <Container>
-      <Text>This is the start screen</Text>
-      <Button title='Begin!' onPress={() => navigation.push('Form')} />
+      <Text>This is the Fearful screen</Text>
+      <Button onPress={() => navigation.push('Selfish')} title='To Selfish' />
     </Container>
   );
 };
 
-export default StartScreen;
+export default FearfulScreen;
 
 const Container = styled.View`
   flex: 1;

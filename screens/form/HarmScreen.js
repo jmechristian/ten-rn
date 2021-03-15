@@ -1,16 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StartScreen = ({ navigation }) => {
+const HarmScreen = ({ navigation }) => {
   return (
     <Container>
-      <Text>This is the start screen</Text>
-      <Button title='Begin!' onPress={() => navigation.push('Form')} />
+      <Text>This is the Harm screen</Text>
+      <Button onPress={() => navigation.push('Kind')} title='To Kind' />
     </Container>
   );
 };
 
-export default StartScreen;
+export default HarmScreen;
 
 const Container = styled.View`
   flex: 1;

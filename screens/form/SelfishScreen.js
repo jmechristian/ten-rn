@@ -1,16 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StartScreen = ({ navigation }) => {
+const SelfishScreen = ({ navigation }) => {
   return (
     <Container>
-      <Text>This is the start screen</Text>
-      <Button title='Begin!' onPress={() => navigation.push('Form')} />
+      <Text>This is the Selfish screen</Text>
+      <Button
+        onPress={() => navigation.push('Dishonest')}
+        title='To Dishonest'
+      />
     </Container>
   );
 };
 
-export default StartScreen;
+export default SelfishScreen;
 
 const Container = styled.View`
   flex: 1;

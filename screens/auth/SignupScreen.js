@@ -1,16 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
+import SignupModal from '../../components/auth/SignupModal';
 
-const StartScreen = ({ navigation }) => {
+const SignupScreen = ({ navigation }) => {
   return (
     <Container>
-      <Text>This is the start screen</Text>
-      <Button title='Begin!' onPress={() => navigation.push('Form')} />
+      <SignupModal
+        login={() => navigation.push('Start')}
+        signup={() => navigation.push('Login')}
+      />
     </Container>
   );
 };
 
-export default StartScreen;
+export default SignupScreen;
 
 const Container = styled.View`
   flex: 1;

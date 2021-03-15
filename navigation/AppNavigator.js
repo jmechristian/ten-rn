@@ -1,26 +1,14 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import StartScreen from '../screens/start/StartScreen';
-import EntriesScreen from '../screens/entries/EntriesScreen';
+import AuthNavigator from './AuthNavigator';
 
-const HomeStack = createBottomTabNavigator();
-
-export const HomeStackNavigator = () => {
-  return (
-    <HomeStack.Navigator>
-      <HomeStack.Screen name='Start' component={StartScreen} />
-      <HomeStack.Screen name='Entries' component={EntriesScreen} />
-    </HomeStack.Navigator>
-  );
-};
-
-export const AppNavigator = () => {
+const AppNavigator = () => {
   return (
     <NavigationContainer>
-      <HomeStackNavigator />
+      <AuthNavigator />
     </NavigationContainer>
   );
 };
+
+export default AppNavigator;

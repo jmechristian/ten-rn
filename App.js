@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppNavigator } from './navigation/AppNavigator';
+import AppNavigator from './navigation/AppNavigator';
 
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
