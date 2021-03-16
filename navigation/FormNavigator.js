@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import ResentfulScreen from '../screens/form/ResentfulScreen';
@@ -14,6 +15,8 @@ import ChecklistScreen from '../screens/form/ChecklistScreen';
 const FormStack = createStackNavigator();
 
 const FormNavigator = () => {
+  const formState = useSelector((state) => state.form);
+
   return (
     <FormStack.Navigator screenOptions={{ headerShown: false }}>
       <FormStack.Screen name='Resentful' component={ResentfulScreen} />

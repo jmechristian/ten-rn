@@ -1,8 +1,10 @@
 import React from 'react';
 import AppNavigator from './navigation/AppNavigator';
 
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 
 import { formReducer } from './store/reducer/form';
 import { entriesReducer } from './store/reducer/entries';
@@ -12,7 +14,10 @@ const rootReducer = combineReducers({
   entries: entriesReducer,
 });
 
-const store = createStore(rootReducer);
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(thunk))
+);
 
 export default function App() {
   return (

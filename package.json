@@ -5,7 +5,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "debug": "open 'rndebugger://set-debugger-loc?host=localhost&port=8081' && expo start"
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.10",
@@ -24,6 +25,9 @@
     "react-native-web": "~0.13.12",
     "react-redux": "^7.2.2",
     "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.3.0",
+    "remote-redux-devtools": "^0.5.16",
     "styled-components": "^5.2.1"
   },
   "devDependencies": {
