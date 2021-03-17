@@ -2,12 +2,13 @@ import { UPDATE_VALUE } from '../actions/form';
 
 const initialState = {
   formData: {
-    resentful: 'resentful',
+    resentful: '',
     selfish: '',
     dishonest: '',
     fearful: '',
     obsessing: '',
     secrets: '',
+    kind: '',
     harm: '',
     act: '',
   },
