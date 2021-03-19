@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { updateValue } from '../../store/actions/form';
 
 const ResentfulScreen = ({ navigation }) => {
+  const [text, setText] = useState('');
+  const dispatch = useDispatch();
+  const formState = useSelector((state) => state.form);
+  const { formData } = formState;
+
+  const submitAndMoveForward = () => {
+    dispatch(updateValue('resentful', text));
+    navigation.push('selfish');
+  };
+
   return (
     <Container>
-      <Title>Resentful</Title>
-      <Button onPress={() => navigation.push('selfish')}>
+      <Title>Was I resentful?</Title>
+      <TextInput onChangeText={setText} defaultValue={formData.resentful} />
+      <Button onPress={submitAndMoveForward}>
         <ButtonText>NEXT</ButtonText>
       </Button>
     </Container>
@@ -20,7 +34,27 @@ const Container = styled.View`
   align-items: center;
 `;
 
-const Title = styled.Text``;
+const Title = styled.Text`
+  font-size: 24px;
+  font-weight: bold;
+`;
 
-const Button = styled.TouchableOpacity``;
-const ButtonText = styled.Text``;
+const TextInput = styled.TextInput`
+  border: 1px solid black;
+  width: 200px;
+  height: 50px;
+  margin-top: 18px;
+  padding-left: 12px;
+`;
+
+const Button = styled.TouchableOpacity`
+  background-color: black;
+  width: 200px;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 24px;
+`;
+const ButtonText = styled.Text`
+  color: white;
+`;
