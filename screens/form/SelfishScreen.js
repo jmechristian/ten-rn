@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { updateValue } from '../../store/actions/form';
 
-const ResentfulScreen = ({ navigation }) => {
+const SelfishScreen = ({ navigation }) => {
   const [text, setText] = useState('');
   const dispatch = useDispatch();
   const formState = useSelector((state) => state.form);
@@ -25,48 +25,76 @@ const ResentfulScreen = ({ navigation }) => {
   };
 
   return (
-    <Container>
-      <Title>Was I Selfish?</Title>
-      <TextInput onChangeText={setText} defaultValue={formData.selfish} />
-      <Button onPress={submitAndMoveForward}>
-        <ButtonText>NEXT</ButtonText>
-      </Button>
-      <Button onPress={submitAndMoveBack}>
-        <ButtonText>BACK</ButtonText>
-      </Button>
-    </Container>
+    <ImageBack source={require('../../assets/card-back.png')}>
+      <SafeArea>
+        <Title>Was I Selfish?</Title>
+        <TextInput
+          onChangeText={setText}
+          defaultValue={formData.selfish}
+          multiline={true}
+          numberOfLines={6}
+          placeholder='Enter Text...'
+        />
+        <NextButton onPress={submitAndMoveForward}>
+          <ButtonText>NEXT&#8594;</ButtonText>
+        </NextButton>
+        <BackButton onPress={submitAndMoveBack}>
+          <ButtonText>&#8592;BACK</ButtonText>
+        </BackButton>
+      </SafeArea>
+    </ImageBack>
   );
 };
 
-export default ResentfulScreen;
+export default SelfishScreen;
 
-const Container = styled.View`
+const ImageBack = styled.ImageBackground`
   flex: 1;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
+`;
+
+const SafeArea = styled.SafeAreaView`
+  flex: 1;
+  justify-content: flex-end;
 `;
 
 const Title = styled.Text`
-  font-size: 24px;
+  font-size: 116px;
+  line-height: 90px;
   font-weight: bold;
+  font-family: 'Frunchy';
+  position: absolute;
+  top: 125px;
+  left: 31px;
 `;
 
 const TextInput = styled.TextInput`
-  border: 1px solid black;
-  width: 200px;
-  height: 50px;
-  margin-top: 18px;
-  padding-left: 12px;
+  width: 320px;
+  position: absolute;
+  top: 400px;
+  left: 31px;
+  font-size: 24px;
 `;
 
-const Button = styled.TouchableOpacity`
+const NextButton = styled.TouchableOpacity`
   background-color: black;
-  width: 200px;
-  height: 50px;
   justify-content: center;
   align-items: center;
-  margin-top: 24px;
+  width: 100%;
+  height: 80px;
 `;
+
+const BackButton = styled.TouchableOpacity`
+  background-color: #888;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 80px;
+`;
+
 const ButtonText = styled.Text`
   color: white;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 8px;
 `;

@@ -5,6 +5,8 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
+import { useFonts } from '@use-expo/font';
+import AppLoading from 'expo-app-loading';
 
 import { formReducer } from './store/reducer/form';
 import { entriesReducer } from './store/reducer/entries';
@@ -19,10 +21,22 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(thunk))
 );
 
-export default function App() {
+const customFonts = {
+  Frunchy: require('./assets/fonts/Frunchy.otf'),
+};
+
+const App = () => {
+  const [isLoaded] = useFonts(customFonts);
+
+  if (!isLoaded) {
+    return <AppLoading />;
+  }
+
   return (
     <Provider store={store}>
       <AppNavigator />
     </Provider>
   );
-}
+};
+
+export default App;

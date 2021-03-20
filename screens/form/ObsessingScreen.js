@@ -1,29 +1,100 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { updateValue } from '../../store/actions/form';
 
 const ObsessingScreen = ({ navigation }) => {
+  const [text, setText] = useState('');
+  const dispatch = useDispatch();
+  const formState = useSelector((state) => state.form);
+  const { formData } = formState;
+
+  useEffect(() => {
+    setText(formData.obsessing);
+  }, []);
+
+  const submitAndMoveForward = () => {
+    dispatch(updateValue('obsessing', text));
+    navigation.push('secrets');
+  };
+
+  const submitAndMoveBack = () => {
+    dispatch(updateValue('obsessing', text));
+    navigation.goBack();
+  };
+
   return (
-    <Container>
-      <Title>Obsessing</Title>
-      <Button onPress={() => navigation.push('secrets')}>
-        <ButtonText>NEXT</ButtonText>
-      </Button>
-      <Button onPress={() => navigation.pop()}>
-        <ButtonText>BACK</ButtonText>
-      </Button>
-    </Container>
+    <ImageBack source={require('../../assets/card-back.png')}>
+      <SafeArea>
+        <Title>Have I been Obsessing?</Title>
+        <TextInput
+          onChangeText={setText}
+          defaultValue={formData.obsessing}
+          multiline={true}
+          numberOfLines={6}
+          placeholder='Enter Text...'
+        />
+        <NextButton onPress={submitAndMoveForward}>
+          <ButtonText>NEXT&#8594;</ButtonText>
+        </NextButton>
+        <BackButton onPress={submitAndMoveBack}>
+          <ButtonText>&#8592;BACK</ButtonText>
+        </BackButton>
+      </SafeArea>
+    </ImageBack>
   );
 };
 
 export default ObsessingScreen;
 
-const Container = styled.View`
+const ImageBack = styled.ImageBackground`
   flex: 1;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
 `;
 
-const Title = styled.Text``;
+const SafeArea = styled.SafeAreaView`
+  flex: 1;
+  justify-content: flex-end;
+`;
 
-const Button = styled.TouchableOpacity``;
-const ButtonText = styled.Text``;
+const Title = styled.Text`
+  font-size: 100px;
+  line-height: 85px;
+  font-weight: bold;
+  font-family: 'Frunchy';
+  position: absolute;
+  top: 125px;
+  left: 31px;
+`;
+
+const TextInput = styled.TextInput`
+  width: 320px;
+  position: absolute;
+  top: 400px;
+  left: 31px;
+  font-size: 24px;
+`;
+
+const NextButton = styled.TouchableOpacity`
+  background-color: black;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 80px;
+`;
+
+const BackButton = styled.TouchableOpacity`
+  background-color: #888;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 80px;
+`;
+
+const ButtonText = styled.Text`
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 8px;
+`;
