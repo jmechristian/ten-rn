@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -9,6 +9,10 @@ const ResentfulScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const formState = useSelector((state) => state.form);
   const { formData } = formState;
+
+  useEffect(() => {
+    setText(formData.resentful);
+  }, []);
 
   const submitAndMoveForward = () => {
     dispatch(updateValue('resentful', text));

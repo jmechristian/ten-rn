@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const Row = ({ title, initialValue, toggleSwitch }) => {
+const Row = ({ question, initialValue, toggleSwitch, title }) => {
   const [switchValue, setSwitchValue] = useState(initialValue);
   const updateValue = () => {
     setSwitchValue((prevState) => !prevState);
@@ -9,12 +9,11 @@ const Row = ({ title, initialValue, toggleSwitch }) => {
   };
 
   return (
-    <Container borderBottomColor='#000000' borderBottomWidth='1'>
-      <Title>{title}?</Title>
+    <Container>
+      <Title>{question}?</Title>
       <Switch
-        trackColor={{ false: '#767577', true: '#81b0ff' }}
-        thumbColor={initialValue ? '#f5dd4b' : '#f4f3f4'}
-        ios_backgroundColor='#3e3e3e'
+        trackColor={{ false: '#ffffff', true: '#000000' }}
+        thumbColor={!initialValue ? '#000000' : '#ffffff'}
         onValueChange={updateValue}
         value={switchValue}
       />
@@ -25,17 +24,17 @@ const Row = ({ title, initialValue, toggleSwitch }) => {
 export default Row;
 
 const Container = styled.View`
-  width: 75%;
-  display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
   padding-bottom: 18px;
   padding-top: 18px;
+  margin: 0 18px;
+  width: 40%;
 `;
 
 const Title = styled.Text`
   font-size: 16px;
+  margin-bottom: 8px;
 `;
 
 const Switch = styled.Switch``;

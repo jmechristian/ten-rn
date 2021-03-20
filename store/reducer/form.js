@@ -1,4 +1,4 @@
-import { UPDATE_VALUE, UPDATE_SWITCH } from '../actions/form';
+import { UPDATE_VALUE, UPDATE_SWITCH, CLEAR_STATE } from '../actions/form';
 
 const initialState = {
   formData: {
@@ -38,6 +38,12 @@ export const formReducer = (state = initialState, action) => {
       return {
         ...state,
         checklist: newChecklist,
+      };
+    case CLEAR_STATE:
+      return {
+        ...state,
+        formData: initialState.formData,
+        checklist: initialState.checklist,
       };
     default:
       return state;

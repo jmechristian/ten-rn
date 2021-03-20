@@ -10,6 +10,7 @@ import SecretsScreen from '../screens/form/SecretsScreen';
 import HarmScreen from '../screens/form/HarmScreen';
 import ActScreen from '../screens/form/ActScreen';
 import ChecklistScreen from '../screens/form/ChecklistScreen';
+import StartScreen from '../screens/start/StartScreen';
 
 const FormStack = createStackNavigator();
 
@@ -25,6 +26,7 @@ const FormNavigator = () => {
       <FormStack.Screen name='harm' component={HarmScreen} />
       <FormStack.Screen name='act' component={ActScreen} />
       <FormStack.Screen name='checklist' component={ChecklistScreen} />
+      <FormStack.Screen name='start' component={StartScreen} />
     </FormStack.Navigator>
   );
 };
