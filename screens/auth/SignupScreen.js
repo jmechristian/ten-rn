@@ -4,21 +4,20 @@ import SignupModal from '../../components/auth/SignupModal';
 
 const SignupScreen = ({ navigation }) => {
   return (
-    <Container>
+    <ImageBack source={require('../../assets/login-back.png')}>
       <SignupModal
         login={() => navigation.push('Start')}
         signup={() => navigation.push('Login')}
       />
-    </Container>
+    </ImageBack>
   );
 };
 
 export default SignupScreen;
 
-const Container = styled.View`
+const ImageBack = styled.ImageBackground`
   flex: 1;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
 `;
 
 const Text = styled.Text``;

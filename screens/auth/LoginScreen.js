@@ -5,21 +5,20 @@ import LoginModal from '../../components/auth/LoginModal';
 
 const LoginScreen = ({ navigation }) => {
   return (
-    <Container>
+    <ImageBack source={require('../../assets/login-back.png')}>
       <LoginModal
         login={() => navigation.push('Start')}
         signup={() => navigation.push('Signup')}
       />
-    </Container>
+    </ImageBack>
   );
 };
 
 export default LoginScreen;
 
-const Container = styled.View`
+const ImageBack = styled.ImageBackground`
   flex: 1;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
 `;
 
 const Text = styled.Text``;

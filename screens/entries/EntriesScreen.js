@@ -1,20 +1,103 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import moment from 'moment';
+import { View } from 'react-native';
 
 const EntriesScreen = () => {
+  const { entries } = useSelector((state) => state.entries);
+
   return (
-    <Container>
-      <Text>This is the Entries screen</Text>
-    </Container>
+    <ImageBack source={require('../../assets/start-screen.png')}>
+      <SafeArea>
+        <Heading>ENTRIES</Heading>
+        <EntryList
+          data={entries}
+          keyExtractor={(item) => item.id}
+          contentContainerStyle={{
+            padding: '2%',
+            paddingTop: '4%',
+          }}
+          renderItem={({ item, index }) => {
+            const entryDate = moment(item.submitted).format('MMMM D, YYYY');
+            const entryDay = moment(item.submitted).format('ddd');
+            return (
+              <EntryWrapper>
+                <View>
+                  <EntryDay>{entryDay}</EntryDay>
+                  <EntryDate>{entryDate}</EntryDate>
+                </View>
+                <ArrowWrapper>
+                  <Arrow>&#8594;</Arrow>
+                </ArrowWrapper>
+              </EntryWrapper>
+            );
+          }}
+        />
+      </SafeArea>
+    </ImageBack>
   );
 };
 
 export default EntriesScreen;
 
-const Container = styled.View`
+const ImageBack = styled.ImageBackground`
   flex: 1;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
 `;
 
-const Text = styled.Text``;
+const SafeArea = styled.SafeAreaView`
+  flex: 1;
+  justify-content: flex-end;
+`;
+
+const Heading = styled.Text`
+  font-weight: bold;
+  font-size: 30px;
+  letter-spacing: 12px;
+  position: absolute;
+  top: 105px;
+  left: 31px;
+`;
+
+const EntryList = styled.FlatList`
+  position: absolute;
+  width: 100%;
+  top: 175px;
+`;
+
+const EntryWrapper = styled.TouchableOpacity`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  opacity: 0.9;
+  margin-bottom: 16px;
+  padding: 24px;
+  border-radius: 10px;
+`;
+
+const EntryDate = styled.Text`
+  font-family: 'Frunchy';
+  font-size: 44px;
+`;
+
+const EntryDay = styled.Text`
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+`;
+
+const ArrowWrapper = styled.View`
+  background-color: #000000;
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+`;
+
+const Arrow = styled.Text`
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+`;

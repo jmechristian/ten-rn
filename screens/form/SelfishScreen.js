@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { TouchableWithoutFeedback, Keyboard } from 'react-native';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -26,22 +27,24 @@ const SelfishScreen = ({ navigation }) => {
 
   return (
     <ImageBack source={require('../../assets/card-back.png')}>
-      <SafeArea>
-        <Title>Was I Selfish?</Title>
-        <TextInput
-          onChangeText={setText}
-          defaultValue={formData.selfish}
-          multiline={true}
-          numberOfLines={6}
-          placeholder='Enter Text...'
-        />
-        <NextButton onPress={submitAndMoveForward}>
-          <ButtonText>NEXT&#8594;</ButtonText>
-        </NextButton>
-        <BackButton onPress={submitAndMoveBack}>
-          <ButtonText>&#8592;BACK</ButtonText>
-        </BackButton>
-      </SafeArea>
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        <SafeArea>
+          <Title>Was I Selfish?</Title>
+          <TextInput
+            onChangeText={setText}
+            defaultValue={formData.selfish}
+            multiline={true}
+            numberOfLines={6}
+            placeholder='Enter Text...'
+          />
+          <NextButton onPress={submitAndMoveForward}>
+            <ButtonText>NEXT&#8594;</ButtonText>
+          </NextButton>
+          <BackButton onPress={submitAndMoveBack}>
+            <ButtonText>&#8592;BACK</ButtonText>
+          </BackButton>
+        </SafeArea>
+      </TouchableWithoutFeedback>
     </ImageBack>
   );
 };

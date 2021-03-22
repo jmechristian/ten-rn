@@ -1,24 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 
+import { useDispatch, useSelector } from 'react-redux';
 import { updateSwitch, clearState } from '../../store/actions/form';
+import { getEntries } from '../../store/actions/entries';
 
 import Row from '../../components/form/Row';
 
 const ChecklistScreen = ({ navigation }) => {
-  const switchValue = useSelector((state) => state.form);
-  const { checklist } = switchValue;
+  const [loading, setLoading] = useState(false);
+  const formState = useSelector((state) => state.form);
+  const { checklist } = formState;
   const dispatch = useDispatch();
 
   const toggleSwitch = (title, value) => {
     dispatch(updateSwitch(title, value));
   };
 
-  const submitAndMoveForward = () => {
-    console.log(switchValue);
-    dispatch(clearState());
-    navigation.push('start');
+  const submitAndMoveForward = async () => {
+    setLoading(true);
+    const submitted = new Date();
+    try {
+      await axios.post('https://step-ten-server.herokuapp.com/api/entries/', {
+        submitted,
+        entry: formState.formData,
+        checklist: formState.checklist,
+      });
+      dispatch(clearState());
+      dispatch(getEntries());
+      navigation.push('entries');
+    } catch (err) {}
+    setLoading(false);
   };
 
   const submitAndMoveBack = () => {

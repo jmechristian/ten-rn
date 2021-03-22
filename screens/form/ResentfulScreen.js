@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { TouchableWithoutFeedback, Keyboard } from 'react-native';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -21,19 +22,21 @@ const ResentfulScreen = ({ navigation }) => {
 
   return (
     <ImageBack source={require('../../assets/card-back.png')}>
-      <SafeArea>
-        <Title>Was I Resentful?</Title>
-        <TextInput
-          onChangeText={setText}
-          defaultValue={formData.resentful}
-          multiline={true}
-          numberOfLines={6}
-          placeholder='Enter Text...'
-        />
-        <Button onPress={submitAndMoveForward}>
-          <ButtonText>NEXT&#8594;</ButtonText>
-        </Button>
-      </SafeArea>
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        <SafeArea>
+          <Title>Was I Resentful?</Title>
+          <TextInput
+            onChangeText={setText}
+            defaultValue={formData.resentful}
+            multiline={true}
+            numberOfLines={6}
+            placeholder='Enter Text...'
+          />
+          <Button onPress={submitAndMoveForward}>
+            <ButtonText>NEXT&#8594;</ButtonText>
+          </Button>
+        </SafeArea>
+      </TouchableWithoutFeedback>
     </ImageBack>
   );
 };

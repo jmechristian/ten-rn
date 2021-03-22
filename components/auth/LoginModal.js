@@ -5,10 +5,9 @@ const LoginModal = ({ login, signup }) => {
   return (
     <Container>
       <Modal>
-        <Logo source={require('../../assets/icon.png')} />
-        <Text>Start Learning. Access Pro Content.</Text>
-        <TextInput />
-        <TextInput />
+        <Logo source={require('../../assets/fake-logo.png')} />
+        <TextInput placeholder='Email' />
+        <TextInput placeholder='Password' />
         <ButtonView onPress={login}>
           <ButtonText>Log in</ButtonText>
         </ButtonView>
@@ -47,15 +46,16 @@ const Modal = styled.View`
   width: 335px;
   height: 460px;
   border-radius: 20px;
-  background: white;
+  background: rgba(255, 255, 255, 0.75);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
   align-items: center;
 `;
 
 const Logo = styled.Image`
-  width: 44px;
-  height: 44px;
-  margin-top: 50px;
+  width: 199px;
+  height: 80px;
+  margin-top: 40px;
+  margin-bottom: 15px;
 `;
 
 const Text = styled.Text`
@@ -69,19 +69,19 @@ const Text = styled.Text`
 `;
 
 const ButtonView = styled.TouchableOpacity`
-  background: #5263ff;
+  background: #000000;
   width: 295px;
   height: 50px;
   justify-content: center;
   align-items: center;
   border-radius: 10px;
   margin-top: 20px;
-  box-shadow: 0 5px 5px #c2cbff;
 `;
 
 const ButtonText = styled.Text`
   color: white;
   text-transform: uppercase;
-  font-weight: 600;
-  font-size: 20px;
+  font-weight: bold;
+  font-size: 16px;
+  letter-spacing: 6px;
 `;

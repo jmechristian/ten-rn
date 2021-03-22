@@ -28,9 +28,9 @@ const customFonts = {
 const App = () => {
   const [isLoaded] = useFonts(customFonts);
 
-  if (!isLoaded) {
-    return <AppLoading />;
-  }
+  // if (!isLoaded) {
+  //   return <AppLoading />;
+  // }
 
   return (
     <Provider store={store}>

@@ -1,7 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
+import { getEntries } from '../../store/actions/entries';
+
 const StartScreen = ({ navigation }) => {
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setLoading(true);
+    dispatch(getEntries());
+    setLoading(false);
+  }, [dispatch]);
+
   const step =
     'Continued to take personal inventory and when we were wrong promptly admitted it.';
   return (
