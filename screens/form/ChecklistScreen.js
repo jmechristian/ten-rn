@@ -7,6 +7,7 @@ import { updateSwitch, clearState } from '../../store/actions/form';
 import { getEntries } from '../../store/actions/entries';
 
 import Row from '../../components/form/Row';
+import Loading from '../../components/Loading';
 
 const ChecklistScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
@@ -38,69 +39,73 @@ const ChecklistScreen = ({ navigation }) => {
     navigation.goBack();
   };
 
-  return (
-    <ImageBack source={require('../../assets/card-back.png')}>
-      <SafeArea>
-        <Title>Daily Checklist</Title>
-        <ChecklistContainer>
-          <Row
-            question='Go to a Meeting'
-            initialValue={checklist.meeting}
-            toggleSwitch={toggleSwitch}
-            title='meeting'
-          />
-          <Row
-            question='Did I Meditate'
-            initialValue={checklist.meditated}
-            toggleSwitch={toggleSwitch}
-            title='meditated'
-          />
-          <Row
-            question='Did I Fellowship'
-            initialValue={checklist.fellowship}
-            toggleSwitch={toggleSwitch}
-            title='fellowship'
-          />
-          <Row
-            question='Read Literature'
-            initialValue={checklist.literature}
-            toggleSwitch={toggleSwitch}
-            title='literature'
-          />
-          <Row
-            question='Did I Pray'
-            initialValue={checklist.pray}
-            toggleSwitch={toggleSwitch}
-            title='pray'
-          />
-          <Row
-            question='Talk to Sponsor'
-            initialValue={checklist.sponsor}
-            toggleSwitch={toggleSwitch}
-            title='sponsor'
-          />
-          <Row
-            question='Talk to an Alcoholic'
-            initialValue={checklist.another}
-            toggleSwitch={toggleSwitch}
-            title='another'
-          />
-          <Row
-            question='Help Another Person'
-            initialValue={checklist.helped}
-            toggleSwitch={toggleSwitch}
-            title='helped'
-          />
-        </ChecklistContainer>
-        <NextButton onPress={submitAndMoveForward}>
-          <ButtonText>NEXT&#8594;</ButtonText>
-        </NextButton>
-        <BackButton onPress={submitAndMoveBack}>
-          <ButtonText>&#8592;BACK</ButtonText>
-        </BackButton>
-      </SafeArea>
-    </ImageBack>
-  );
+  if (loading) {
+    return <Loading />;
+  } else {
+    return (
+      <ImageBack source={require('../../assets/card-back.png')}>
+        <SafeArea>
+          <Title>Daily Checklist</Title>
+          <ChecklistContainer>
+            <Row
+              question='Go to a Meeting'
+              initialValue={checklist.meeting}
+              toggleSwitch={toggleSwitch}
+              title='meeting'
+            />
+            <Row
+              question='Did I Meditate'
+              initialValue={checklist.meditated}
+              toggleSwitch={toggleSwitch}
+              title='meditated'
+            />
+            <Row
+              question='Did I Fellowship'
+              initialValue={checklist.fellowship}
+              toggleSwitch={toggleSwitch}
+              title='fellowship'
+            />
+            <Row
+              question='Read Literature'
+              initialValue={checklist.literature}
+              toggleSwitch={toggleSwitch}
+              title='literature'
+            />
+            <Row
+              question='Did I Pray'
+              initialValue={checklist.pray}
+              toggleSwitch={toggleSwitch}
+              title='pray'
+            />
+            <Row
+              question='Talk to Sponsor'
+              initialValue={checklist.sponsor}
+              toggleSwitch={toggleSwitch}
+              title='sponsor'
+            />
+            <Row
+              question='Talk to an Alcoholic'
+              initialValue={checklist.another}
+              toggleSwitch={toggleSwitch}
+              title='another'
+            />
+            <Row
+              question='Help Another Person'
+              initialValue={checklist.helped}
+              toggleSwitch={toggleSwitch}
+              title='helped'
+            />
+          </ChecklistContainer>
+          <NextButton onPress={submitAndMoveForward}>
+            <ButtonText>NEXT&#8594;</ButtonText>
+          </NextButton>
+          <BackButton onPress={submitAndMoveBack}>
+            <ButtonText>&#8592;BACK</ButtonText>
+          </BackButton>
+        </SafeArea>
+      </ImageBack>
+    );
+  }
 };
 
 export default ChecklistScreen;

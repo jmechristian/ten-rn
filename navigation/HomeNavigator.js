@@ -23,7 +23,7 @@ const HomeNavigator = () => {
           tabBarIcon: (tabInfo) => (
             <Ionicons
               name='add-circle-outline'
-              size={36}
+              size={32}
               color={tabInfo.color}
             />
           ),
@@ -34,7 +34,7 @@ const HomeNavigator = () => {
         component={EntriesScreen}
         options={{
           tabBarIcon: (tabInfo) => (
-            <Ionicons name='calendar-outline' size={36} color={tabInfo.color} />
+            <Ionicons name='calendar-outline' size={32} color={tabInfo.color} />
           ),
         }}
       />

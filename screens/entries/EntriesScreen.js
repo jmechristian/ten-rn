@@ -56,22 +56,21 @@ const Heading = styled.Text`
   font-size: 30px;
   letter-spacing: 12px;
   position: absolute;
-  top: 105px;
+  top: 85px;
   left: 31px;
 `;
 
 const EntryList = styled.FlatList`
   position: absolute;
   width: 100%;
-  top: 175px;
+  top: 135px;
 `;
 
 const EntryWrapper = styled.TouchableOpacity`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: white;
-  opacity: 0.9;
+  background-color: rgba(255, 255, 255, 0.8);
   margin-bottom: 16px;
   padding: 24px;
   border-radius: 10px;

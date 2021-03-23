@@ -2,31 +2,44 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
+import Loading from '../../components/Loading';
 import { getEntries } from '../../store/actions/entries';
 
 const StartScreen = ({ navigation }) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setLoading(true);
-    dispatch(getEntries());
-    setLoading(false);
+    const setEntries = () => {
+      setLoading(true);
+      try {
+        dispatch(getEntries());
+      } catch (err) {
+        console.log(err);
+      }
+      setLoading(false);
+    };
+    setEntries();
   }, [dispatch]);
 
   const step =
     'Continued to take personal inventory and when we were wrong promptly admitted it.';
-  return (
-    <ImageBack source={require('../../assets/start-screen.png')}>
-      <SafeArea>
-        <Heading>STEP TEN</Heading>
-        <Step>{step}</Step>
-        <Button onPress={() => navigation.push('Form')}>
-          <ButtonText>START!</ButtonText>
-        </Button>
-      </SafeArea>
-    </ImageBack>
-  );
+
+  if (loading) {
+    return <Loading />;
+  } else {
+    return (
+      <ImageBack source={require('../../assets/start-screen.png')}>
+        <SafeArea>
+          <Heading>STEP TEN</Heading>
+          <Step>{step}</Step>
+          <Button onPress={() => navigation.push('Form')}>
+            <ButtonText>START!</ButtonText>
+          </Button>
+        </SafeArea>
+      </ImageBack>
+    );
+  }
 };
 
 export default StartScreen;
@@ -46,7 +59,7 @@ const Heading = styled.Text`
   font-size: 30px;
   letter-spacing: 12px;
   position: absolute;
-  top: 125px;
+  top: 85px;
   left: 31px;
 `;
 
@@ -58,7 +71,7 @@ const Step = styled.Text`
   padding-right: 31px;
   padding-top: 12px;
   position: absolute;
-  top: 205px;
+  top: 170px;
   left: 31px;
 `;
 
