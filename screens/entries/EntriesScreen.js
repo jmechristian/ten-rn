@@ -4,37 +4,39 @@ import styled from 'styled-components';
 import moment from 'moment';
 import { View } from 'react-native';
 
-const EntriesScreen = () => {
+const EntriesScreen = ({ navigation }) => {
   const { entries } = useSelector((state) => state.entries);
 
   return (
     <ImageBack source={require('../../assets/start-screen.png')}>
-      <SafeArea>
-        <Heading>ENTRIES</Heading>
-        <EntryList
-          data={entries}
-          keyExtractor={(item) => item.id}
-          contentContainerStyle={{
-            padding: '2%',
-            paddingTop: '4%',
-          }}
-          renderItem={({ item, index }) => {
-            const entryDate = moment(item.submitted).format('MMMM D, YYYY');
-            const entryDay = moment(item.submitted).format('ddd');
-            return (
-              <EntryWrapper>
-                <View>
-                  <EntryDay>{entryDay}</EntryDay>
-                  <EntryDate>{entryDate}</EntryDate>
-                </View>
-                <ArrowWrapper>
-                  <Arrow>&#8594;</Arrow>
-                </ArrowWrapper>
-              </EntryWrapper>
-            );
-          }}
-        />
-      </SafeArea>
+      <Heading>ENTRIES</Heading>
+      <EntryList
+        data={entries}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={{
+          padding: '2%',
+          paddingTop: '4%',
+        }}
+        renderItem={({ item, index }) => {
+          const entryDate = moment(item.submitted).format('MMMM D, YYYY');
+          const entryDay = moment(item.submitted).format('ddd');
+          return (
+            <EntryWrapper
+              onPress={() => {
+                navigation.navigate('entry', { itemId: item.id });
+              }}
+            >
+              <View>
+                <EntryDay>{entryDay}</EntryDay>
+                <EntryDate>{entryDate}</EntryDate>
+              </View>
+              <ArrowWrapper>
+                <Arrow>&#8594;</Arrow>
+              </ArrowWrapper>
+            </EntryWrapper>
+          );
+        }}
+      />
     </ImageBack>
   );
 };
@@ -44,11 +46,6 @@ export default EntriesScreen;
 const ImageBack = styled.ImageBackground`
   flex: 1;
   width: 100%;
-`;
-
-const SafeArea = styled.SafeAreaView`
-  flex: 1;
-  justify-content: flex-end;
 `;
 
 const Heading = styled.Text`
@@ -61,9 +58,8 @@ const Heading = styled.Text`
 `;
 
 const EntryList = styled.FlatList`
-  position: absolute;
   width: 100%;
-  top: 135px;
+  margin-top: 135px;
 `;
 
 const EntryWrapper = styled.TouchableOpacity`

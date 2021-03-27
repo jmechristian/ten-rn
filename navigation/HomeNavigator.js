@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 
 import StartNavigator from '../navigation/StartNavigator';
-import EntriesScreen from '../screens/entries/EntriesScreen';
+import EntryNavigator from '../navigation/EntryNavigator';
 
 const HomeStack = createBottomTabNavigator();
 
@@ -31,7 +31,7 @@ const HomeNavigator = () => {
       />
       <HomeStack.Screen
         name='Entries'
-        component={EntriesScreen}
+        component={EntryNavigator}
         options={{
           tabBarIcon: (tabInfo) => (
             <Ionicons name='calendar-outline' size={32} color={tabInfo.color} />

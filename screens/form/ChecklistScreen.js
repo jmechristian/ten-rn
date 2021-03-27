@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { TabActions } from '@react-navigation/native';
 import styled from 'styled-components';
 import axios from 'axios';
 
@@ -14,6 +15,7 @@ const ChecklistScreen = ({ navigation }) => {
   const formState = useSelector((state) => state.form);
   const { checklist } = formState;
   const dispatch = useDispatch();
+  const jumpToAction = TabActions.jumpTo('Entries');
 
   const toggleSwitch = (title, value) => {
     dispatch(updateSwitch(title, value));
@@ -30,82 +32,82 @@ const ChecklistScreen = ({ navigation }) => {
       });
       dispatch(clearState());
       dispatch(getEntries());
-      navigation.push('entries');
     } catch (err) {}
     setLoading(false);
+    navigation.dispatch(jumpToAction);
   };
 
   const submitAndMoveBack = () => {
     navigation.goBack();
   };
 
-  if (loading) {
-    return <Loading />;
-  } else {
-    return (
-      <ImageBack source={require('../../assets/card-back.png')}>
-        <SafeArea>
-          <Title>Daily Checklist</Title>
-          <ChecklistContainer>
-            <Row
-              question='Go to a Meeting'
-              initialValue={checklist.meeting}
-              toggleSwitch={toggleSwitch}
-              title='meeting'
-            />
-            <Row
-              question='Did I Meditate'
-              initialValue={checklist.meditated}
-              toggleSwitch={toggleSwitch}
-              title='meditated'
-            />
-            <Row
-              question='Did I Fellowship'
-              initialValue={checklist.fellowship}
-              toggleSwitch={toggleSwitch}
-              title='fellowship'
-            />
-            <Row
-              question='Read Literature'
-              initialValue={checklist.literature}
-              toggleSwitch={toggleSwitch}
-              title='literature'
-            />
-            <Row
-              question='Did I Pray'
-              initialValue={checklist.pray}
-              toggleSwitch={toggleSwitch}
-              title='pray'
-            />
-            <Row
-              question='Talk to Sponsor'
-              initialValue={checklist.sponsor}
-              toggleSwitch={toggleSwitch}
-              title='sponsor'
-            />
-            <Row
-              question='Talk to an Alcoholic'
-              initialValue={checklist.another}
-              toggleSwitch={toggleSwitch}
-              title='another'
-            />
-            <Row
-              question='Help Another Person'
-              initialValue={checklist.helped}
-              toggleSwitch={toggleSwitch}
-              title='helped'
-            />
-          </ChecklistContainer>
-          <NextButton onPress={submitAndMoveForward}>
-            <ButtonText>NEXT&#8594;</ButtonText>
-          </NextButton>
-          <BackButton onPress={submitAndMoveBack}>
-            <ButtonText>&#8592;BACK</ButtonText>
-          </BackButton>
-        </SafeArea>
-      </ImageBack>
-    );
-  }
+  return (
+    <ImageBack source={require('../../assets/card-back.png')}>
+      {loading && <Loading />}
+      <SafeArea>
+        <Title>Daily Checklist</Title>
+        <ChecklistContainer>
+          <Row
+            question='Go to a Meeting'
+            initialValue={checklist.meeting}
+            toggleSwitch={toggleSwitch}
+            title='meeting'
+          />
+          <Row
+            question='Did I Meditate'
+            initialValue={checklist.meditated}
+            toggleSwitch={toggleSwitch}
+            title='meditated'
+          />
+          <Row
+            question='Did I Fellowship'
+            initialValue={checklist.fellowship}
+            toggleSwitch={toggleSwitch}
+            title='fellowship'
+          />
+          <Row
+            question='Read Literature'
+            initialValue={checklist.literature}
+            toggleSwitch={toggleSwitch}
+            title='literature'
+          />
+          <Row
+            question='Did I Pray'
+            initialValue={checklist.pray}
+            toggleSwitch={toggleSwitch}
+            title='pray'
+          />
+          <Row
+            question='Talk to Sponsor'
+            initialValue={checklist.sponsor}
+            toggleSwitch={toggleSwitch}
+            title='sponsor'
+          />
+          <Row
+            question='Talk to an Alcoholic'
+            initialValue={checklist.another}
+            toggleSwitch={toggleSwitch}
+            title='another'
+          />
+          <Row
+            question='Help Another Person'
+            initialValue={checklist.helped}
+            toggleSwitch={toggleSwitch}
+            title='helped'
+          />
+        </ChecklistContainer>
+        <NextButton
+          onPress={submitAndMoveForward}
+          disabled={loading ? true : false}
+        >
+          <ButtonText>{loading ? 'SENDING...' : 'SUBMIT'}</ButtonText>
+        </NextButton>
+        <BackButton onPress={submitAndMoveBack}>
+          <ButtonText disabled={loading ? true : false}>&#8592;BACK</ButtonText>
+        </BackButton>
+      </SafeArea>
+    </ImageBack>
+  );
 };
 
 export default ChecklistScreen;

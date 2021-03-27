@@ -11,6 +11,7 @@ import HarmScreen from '../screens/form/HarmScreen';
 import ActScreen from '../screens/form/ActScreen';
 import ChecklistScreen from '../screens/form/ChecklistScreen';
 import EntriesScreen from '../screens/entries/EntriesScreen';
+import EntryScreen from '../screens/entries/EntryScreen';
 
 const FormStack = createStackNavigator();
 
@@ -27,6 +28,7 @@ const FormNavigator = () => {
       <FormStack.Screen name='act' component={ActScreen} />
       <FormStack.Screen name='checklist' component={ChecklistScreen} />
       <FormStack.Screen name='entries' component={EntriesScreen} />
+      <FormStack.Screen name='entry' component={EntryScreen} />
     </FormStack.Navigator>
   );
 };

@@ -1,7 +1,8 @@
-import { GET_ENTRIES } from '../actions/entries';
+import { GET_ENTRIES, SET_LOADING } from '../actions/entries';
 
 const initialState = {
   entries: [],
+  loading: false,
 };
 
 export const entriesReducer = (state = initialState, action) => {
@@ -10,6 +11,11 @@ export const entriesReducer = (state = initialState, action) => {
       return {
         ...state,
         entries: action.payload,
+      };
+    case SET_LOADING:
+      return {
+        ...state,
+        loading: action.payload,
       };
     default:
       return state;

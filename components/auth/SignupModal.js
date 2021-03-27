@@ -6,9 +6,9 @@ const SignupModal = ({ login, signup }) => {
     <Container>
       <Modal>
         <Logo source={require('../../assets/fake-logo.png')} />
-        <TextInput />
-        <TextInput />
-        <TextInput />
+        <TextInput placeholder='Email' />
+        <TextInput placeholder='Username' />
+        <TextInput placeholder='Password' />
         <ButtonView onPress={login}>
           <ButtonText>Submit</ButtonText>
         </ButtonView>

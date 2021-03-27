@@ -1,23 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import Loading from '../../components/Loading';
 import { getEntries } from '../../store/actions/entries';
 
 const StartScreen = ({ navigation }) => {
-  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
+  const { loading } = useSelector((state) => state.entries);
 
   useEffect(() => {
     const setEntries = () => {
-      setLoading(true);
-      try {
-        dispatch(getEntries());
-      } catch (err) {
-        console.log(err);
-      }
-      setLoading(false);
+      dispatch(getEntries());
     };
     setEntries();
   }, [dispatch]);
@@ -25,21 +19,23 @@ const StartScreen = ({ navigation }) => {
   const step =
     'Continued to take personal inventory and when we were wrong promptly admitted it.';
 
-  if (loading) {
-    return <Loading />;
-  } else {
-    return (
+  return (
+    <>
       <ImageBack source={require('../../assets/start-screen.png')}>
+        {loading && <Loading />}
         <SafeArea>
           <Heading>STEP TEN</Heading>
           <Step>{step}</Step>
-          <Button onPress={() => navigation.push('Form')}>
-            <ButtonText>START!</ButtonText>
+          <Button
+            onPress={() => navigation.push('Form')}
+            disabled={loading ? true : false}
+          >
+            <ButtonText>{loading ? 'LOADING...' : 'START!'}</ButtonText>
           </Button>
         </SafeArea>
       </ImageBack>
-    );
-  }
+    </>
+  );
 };
 
 export default StartScreen;
@@ -59,7 +55,7 @@ const Heading = styled.Text`
   font-size: 30px;
   letter-spacing: 12px;
   position: absolute;
-  top: 85px;
+  top: 115px;
   left: 31px;
 `;
 
@@ -71,7 +67,7 @@ const Step = styled.Text`
   padding-right: 31px;
   padding-top: 12px;
   position: absolute;
-  top: 170px;
+  top: 190px;
   left: 31px;
 `;
 
