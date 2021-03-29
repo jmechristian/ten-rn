@@ -1,16 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
+import { Button, Alert } from 'react-native';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import axios from 'axios';
-import moment from 'moment';
 
 import Question from '../../components/Question';
 import Loading from '../../components/Loading';
 
+import { getEntries } from '../../store/actions/entries';
+
 const EntryScreen = ({ route, navigation }) => {
   const [loading, setLoading] = useState(false);
   const [entry, setEntry] = useState();
+  const dispatch = useDispatch();
   const { itemId } = route.params;
 
+  // SET ENTRY DATA
   useEffect(() => {
     const fetchEntry = async () => {
       setLoading(true);
@@ -28,14 +33,49 @@ const EntryScreen = ({ route, navigation }) => {
     fetchEntry();
   }, []);
 
+  // NAVIGATION BUTTONS
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => <Button title='Delete' onPress={deleteAlert} />,
+    });
+  }, [navigation]);
+
+  // DELETE ENTRY
+  const deleteEntry = async () => {
+    setLoading(true);
+    try {
+      await axios
+        .delete(`https://step-ten-server.herokuapp.com/api/entries/${itemId}`)
+        .then(dispatch(getEntries()));
+    } catch (err) {
+      console.log(err);
+    }
+    setLoading(false);
+    navigation.goBack();
+  };
+
+  // ALERT
+  const deleteAlert = () => {
+    Alert.alert('Alert Title', 'My Alert Msg', [
+      {
+        text: 'Cancel',
+        onPress: () => {},
+        style: 'cancel',
+      },
+      {
+        text: 'OK',
+        onPress: () => {
+          deleteEntry();
+        },
+      },
+    ]);
+  };
+
   if (loading) {
     return <Loading />;
   } else {
     return (
       <ImageBack source={require('../../assets/start-screen.png')}>
-        <Heading>
-          {moment(`${entry?.submitted}`).format('ddd, MMMM D, YYYY')}
-        </Heading>
         <EntryContainer>
           <Question
             question='Was I resentful'
@@ -110,15 +150,15 @@ const ImageBack = styled.ImageBackground`
 
 const EntryContainer = styled.ScrollView`
   left: 31px;
-  margin-top: 150px;
   padding-right: 50px;
   padding-top: 16px;
+  margin-top: 28px;
 `;
 
 const Heading = styled.Text`
   font-family: 'Frunchy';
   font-size: 52px;
   position: absolute;
-  top: 85px;
+  top: 65px;
   left: 31px;
 `;

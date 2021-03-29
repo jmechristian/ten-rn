@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import moment from 'moment';
@@ -23,7 +23,10 @@ const EntriesScreen = ({ navigation }) => {
           return (
             <EntryWrapper
               onPress={() => {
-                navigation.navigate('entry', { itemId: item.id });
+                navigation.navigate('entry', {
+                  itemId: item.id,
+                  date: entryDate,
+                });
               }}
             >
               <View>
